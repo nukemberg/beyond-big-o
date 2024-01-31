@@ -21,13 +21,29 @@ layout: intro
 ## Avishai Ish-Shalom
 
 ---
-background: ./images/linear-o.png
+layout: two-cols-header
+image: ./public/images/Deming.jpg
+class: big-quote
 ---
+# Performance "theory"?
+## wat??
+::left::
+
+> Experience by itself teaches nothing...\
+> Without theory, experience has no meaning.\
+> Without theory, one has no questions to ask.\
+> Hence, without theory, there is no learning.
+>  <footer><cite>W. Edwards Deming</cite></footer>
+
+::right::
+<img src="/images/Deming.jpg" />
+---
+
 # Big O
 
 Algorithmic time/memory complexity
 
-<img src="/images/linear-o.svg" class="" />
+<img src="/images/linear-o.svg" />
 
 ---
 
@@ -65,30 +81,109 @@ x5 faster!!!
 
 # Wat
 - Implementations matter
-- IRL everything has a distribution
 - Hardware matters: chokepoints, saturation, characteristic sizes, etc
+- IRL everything has a distribution
 
 ---
-layout: center
-class: text-center
+layout: fact
 ---
 
 # All models are wrong
 ## But some are useful
 
 ---
+
+# Beyond Big O
+
+We need a model which is
+- Rooted in hardware and physical/logical structure
+- Accounts for distributions
+- Follows _implementations_, not _algorithms_
+
+---
+
+# The interaction buffer
+<img src="/images/interaction-buffer.svg">
+
+---
 layout: image-right
-image: ./public/images/Deming.jpg
+image: https://raw.githubusercontent.com/nukemberg/the-math-of-reliability/master/images/queue-latency.svg
+backgroundSize: 100%
 ---
 
->  Experience by itself teaches nothing... Without theory, experience has no meaning. Without theory, one has no questions to ask. Hence, without theory, there is no learning.
+# Queueing 101
 
-\- W. Edwards Deming
 
-<style>
-blockquote {
-  font-size: 30px
-}
-</style>
+- Latency rises non-linearly with utilization
+- Heavily depends on variance
+- Head-of-line blocking
+
+<div class="queue-equation" style="margin-top: auto; display: relative; position: 0px; ">
+$$
+\frac{\rho}{1 - \rho}
+$$
+</div>
 
 ---
+
+
+# Quantum sizes
+
+- Messages must fit in fixed size
+- Split large messages
+- Small messages either
+   - Waste capacity
+   - Amplify throughput 
+
+---
+
+# Batching 101
+- Queue small tasks, try to bin pack into larger containers
+- Larger queue -> better packing efficiency
+- Larger queue -> higher latency
+
+<img src="/images/batching.svg" />
+
+---
+
+# Errors
+Sometimes messages vanish into the void
+
+- Lost messages reduce throughput
+- We may need to _retry_
+- Extra overhead to detect loss
+
+<img src="/images/interaction-buffer-errors.svg" />
+---
+
+# Timeouts
+- Latency can be potentially infinite
+- And we have head-of-line blocking
+- Which kills throughput
+- Timeouts convert latency into errors
+
+---
+
+# Retries
+If it first you don't succeed...
+- Retries convert errors into latency
+- But not everything is retryable...
+- Consumes throughput
+- And can head-of-line block
+
+---
+
+# Layers
+
+<img src="/images/interaction-buffers-layers.svg" />
+
+
+---
+
+# All together now!
+
+
+---
+layout: end
+---
+# May the perf be with you
