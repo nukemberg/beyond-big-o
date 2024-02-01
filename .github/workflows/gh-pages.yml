@@ -27,7 +27,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Build
-        run: npm install && npm run build
+        run: npm install && npm run build -- --base /beyond-big-o/
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
