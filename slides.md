@@ -174,6 +174,15 @@ If it first you don't succeed...
 ---
 
 # Layers
+Sometimes we need to cross several layers (e.g. caches, SSTables)
+- Read amplification
+- Latency amplification
+
+<img src="/images/layers-traversal.svg" style="padding-bottom: 10%; display: block; margin-left: auto;" />
+
+---
+
+# Layers
 
 <img src="/images/interaction-buffers-layers.svg" />
 

@@ -1,5 +1,7 @@
 img {
     max-height: 90%;
+    max-width: 90%;
+    object-fit: contain;
 }
 
 blockquote cite::before {
