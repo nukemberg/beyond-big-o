@@ -24,6 +24,7 @@ layout: intro
 layout: two-cols-header
 image: ./public/images/Deming.jpg
 class: big-quote
+title: Why performance theory
 ---
 # Performance "theory"?
 ## wat??
@@ -52,6 +53,12 @@ Algorithmic time/memory complexity
 
 ---
 
+# In reality....
+<img src="/images/list-insert-latency-dark.svg" />
+
+---
+title: Same algorithm, different performance
+---
 # Explain dis
 
 ```cpp {all|2,3}{at:0}
@@ -103,7 +110,7 @@ We need a model which is
 ---
 
 # The interaction buffer
-<img src="/images/interaction-buffer.svg">
+<img src="/images/interaction-buffer-dark.svg">
 
 ---
 layout: image-right
@@ -112,7 +119,6 @@ backgroundSize: 100%
 ---
 
 # Queueing 101
-
 
 - Latency rises non-linearly with utilization
 - Heavily depends on variance
@@ -142,7 +148,7 @@ $$
 - Larger queue -> better packing efficiency
 - Larger queue -> higher latency
 
-<img src="/images/batching.svg" />
+<img src="/images/interaction-buffer-batching-dark.svg" />
 
 ---
 
@@ -153,7 +159,7 @@ Sometimes messages vanish into the void
 - We may need to _retry_
 - Extra overhead to detect loss
 
-<img src="/images/interaction-buffer-errors.svg" />
+<img src="/images/interaction-buffer-errors-dark.svg" />
 ---
 
 # Timeouts
@@ -178,19 +184,28 @@ Sometimes we need to cross several layers (e.g. caches, SSTables)
 - Read amplification
 - Latency amplification
 
-<img src="/images/layers-traversal.svg" style="padding-bottom: 10%; display: block; margin-left: auto;" />
+<img src="/images/layers-traversal-dark.svg" style="padding-bottom: 10%; display: block; margin-left: auto;" />
 
 ---
 
 # Layers
 
-<img src="/images/interaction-buffers-layers.svg" />
+<img src="/images/interaction-buffers-layers-dark.svg" />
 
 
 ---
 
 # All together now!
 
+---
+
+# Takeaways
+
+- Know your queues
+- Latency/Throughput tradeoffs
+- Align to quantum sizes
+- Batch
+- Mind the latency gaps
 
 ---
 layout: end
