@@ -44,13 +44,16 @@ title: Why performance theory
 
 Algorithmic time/memory complexity
 
-<img src="/images/linear-o.svg" />
+<img src="/images/linear-o-dark.svg" />
 
 ---
 
 # But in reality...
-<img src="/images/actual-linear.svg" />
+<img src="/images/actual-linear-dark.svg" />
 
+---
+disabled: true
+title: List insert example
 ---
 
 # In reality....
@@ -113,20 +116,25 @@ We need a model which is
 <img src="/images/interaction-buffer-dark.svg">
 
 ---
+
+# A crash course in Queueing theory
+<img src="/images/queue-dark.svg">
+
+---
 layout: image-right
-image: https://raw.githubusercontent.com/nukemberg/the-math-of-reliability/master/images/queue-latency.svg
+image: /images/queue-latency-dark.svg
 backgroundSize: 100%
 ---
 
-# Queueing 101
+# Queueing latency
 
 - Latency rises non-linearly with utilization
 - Heavily depends on variance
 - Head-of-line blocking
 
-<div class="queue-equation" style="margin-top: auto; display: relative; position: 0px; ">
+<div class="queue-equation" style="margin-top: auto; float: left;">
 $$
-\frac{\rho}{1 - \rho}
+Latency \propto \frac{\rho}{1 - \rho}
 $$
 </div>
 
