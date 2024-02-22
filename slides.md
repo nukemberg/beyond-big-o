@@ -129,7 +129,6 @@ backgroundSize: 100%
 # Queueing latency
 
 - Latency rises non-linearly with utilization
-- Heavily depends on variance
 - Head-of-line blocking
 
 <div class="queue-equation" style="margin-top: auto; float: left;">
@@ -140,6 +139,18 @@ $$
 
 ---
 
+# Variance and Queueing
+
+- The variance of both _service center_ and _arrival rate_ impact queueing
+- Higher variance &rarr; much higher latency
+
+<div class="queue-equation" style="margin-top: auto; float: left;">
+$$
+Latency \propto \sigma^2
+$$
+</div>
+
+---
 
 # Quantum sizes
 
@@ -153,10 +164,19 @@ $$
 
 # Batching 101
 - Queue small tasks, try to bin pack into larger containers
+- Amortize setup fees
 - Larger queue -> better packing efficiency
 - Larger queue -> higher latency
 
 <img src="/images/interaction-buffer-batching-dark.svg" />
+
+---
+
+# Batching 102
+Some tasks are related
+- Mutations of the same record
+- Reads from the same block
+- Sequential reads
 
 ---
 
