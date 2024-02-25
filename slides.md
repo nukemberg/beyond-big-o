@@ -15,6 +15,7 @@ title: Beyond Big O
 Author: Avishai Ish-Shalom
 mdc: false
 layout: intro
+colorSchema: dark
 ---
 
 # Beyond Big O
