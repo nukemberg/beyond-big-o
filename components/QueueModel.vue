@@ -80,6 +80,7 @@ const data = computed(function() {
 });
 const options = {
     title: 'Queue latency',
+    responsive: false,
     elements: {
         point: {pointStyle: false}
     },
@@ -103,10 +104,11 @@ const options = {
 
 <style scoped>
 .chart {
-    width: 80vh;
     margin: auto;
+    display: inline-block;
+    position: relative;
 }
-.container {
+.chart-container {
     height: fit-content;
     width: fit-content;
     display: block;
@@ -117,17 +119,18 @@ input {
 </style>
 
 <template>
-    <div class="container">
+    <div class="grid grid-rows-2 box chart-container">
         <div class="chart">
-            <Line ref="chart" :data="data" :options="options"></Line>
+            <Line ref="chart" height="250px" :data="data" :options="options"></Line>
         </div>
-    
-        <template v-if="model == 'kingman'">
-            <label for="variance">Variance</label><input label="Variance" type="range" name="variance" id="" min="1" max="10" v-model="variance">
-        </template>
-        <template v-else-if="model == 'mmc'">
+        <div class="box row-span-2 row-start-2">
+            <template v-if="model == 'kingman'">
+                <label for="variance">Variance</label><input label="Variance" type="range" name="variance" id="" min="1" max="10" v-model="variance">
+            </template>
+            <template v-else-if="model == 'mmc'">
                 <label for="workers">Workers</label><input label="Workers" type="range" name="workers" id="" min="1" max="10" v-model="workers">        
-        </template>
+            </template>
+        </div>
     </div>
 </template>
 

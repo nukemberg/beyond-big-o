@@ -12,6 +12,7 @@
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
     "chart.js": "^4.4.1",
+    "simscript": "^1.0.37",
     "vue-chartjs": "^5.3.0"
   }
 }
