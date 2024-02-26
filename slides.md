@@ -151,6 +151,8 @@ Latency \propto \sigma^2
 $$
 </div>
 
+<QueueModel model="kingman"></QueueModel>
+
 ---
 
 # Quantum sizes

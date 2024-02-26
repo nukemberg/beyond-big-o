@@ -10,6 +10,8 @@
   "dependencies": {
     "@slidev/cli": "^0.46.3",
     "@slidev/theme-default": "latest",
-    "@slidev/theme-seriph": "latest"
+    "@slidev/theme-seriph": "latest",
+    "chart.js": "^4.4.1",
+    "vue-chartjs": "^5.3.0"
   }
 }
