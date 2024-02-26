@@ -14,6 +14,31 @@ const props = defineProps({
 function mm1(rho) {
     return rho / (1-rho);
 }
+function factorial(num) {
+    var rval = 1;
+    for (var i = 2; i <= num; i++)
+        rval = rval * i;
+    return rval;
+}
+
+function sumSeries(from, to, func) {
+    var s = 0
+    for (var i = from; i <= to; i++) {
+        s += func(i)
+    }
+    return s
+}
+
+function erlangC(c, r) {
+    let X = r ** c * c / (factorial(c) * (c - r))
+    let Y = sumSeries(0, c - 1, i => r ** i / factorial(i))
+    return X / (X + Y)
+}
+
+function mmc(rho, mu, c) {
+    let lambda = rho * mu * c
+    return erlangC(c, rho * c) / (c * mu - lambda)
+}
 
 function kingman(rho, c_s, c_a) {
     return (Math.pow(c_a, 2) + Math.pow(c_s, 2))*mm1(rho)/2;
@@ -28,7 +53,7 @@ const x = Array.from({length: steps}, (_, i) => i*delta + start);
 const model = ref(props.model);
 const variance = ref(1);
 const chart = ref(null);
-
+const workers = ref(1);
 
 const data = computed(function() {
     let y;
@@ -38,6 +63,14 @@ const data = computed(function() {
             break;
         case "kingman":
             y = x.map((x) => kingman(x, variance.value, 1));
+            break;
+        case "mmc":
+            y = x.map(x => mmc(x, 1, workers.value));
+            if (y[y.length - 1] < 100) {
+                const extra = [0.995, 0.998, 0.999];
+                x.push(...extra);
+                y.push(...extra.map(x => mmc(x, 1, workers.value)));
+            }
             break;
     }
     return {
@@ -91,6 +124,9 @@ input {
     
         <template v-if="model == 'kingman'">
             <label for="variance">Variance</label><input label="Variance" type="range" name="variance" id="" min="1" max="10" v-model="variance">
+        </template>
+        <template v-else-if="model == 'mmc'">
+                <label for="workers">Workers</label><input label="Workers" type="range" name="workers" id="" min="1" max="10" v-model="workers">        
         </template>
     </div>
 </template>

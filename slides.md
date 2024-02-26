@@ -155,6 +155,15 @@ $$
 
 ---
 
+# Multiple workers/Parallelization
+- Shared queue, multiple workers &rarr; lower mean latency
+- Stateful load balancing
+- Better batching
+
+<QueueModel model="mmc"></QueueModel>
+
+---
+
 # Quantum sizes
 
 - Messages must fit in fixed size
