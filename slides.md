@@ -122,6 +122,13 @@ We need a model which is
 <img src="/images/queue-dark.svg">
 
 ---
+
+# Tasks should be independent, but...
+Head of line blocking
+
+<img src="/images/head-of-line-blocking.svg" />
+
+---
 layout: image-right
 image: /images/queue-latency-dark.svg
 backgroundSize: 100%
@@ -172,6 +179,12 @@ $$
    - Waste capacity
    - Amplify throughput 
 
+# Fragmentation
+
+- _N_ messages, instead of 1
+- More chances for errors
+- Wait for re-assembly 
+
 ---
 
 # Batching 101
@@ -189,6 +202,15 @@ Some tasks are related
 - Mutations of the same record
 - Reads from the same block
 - Sequential reads
+
+Example: I/O scheduler
+
+---
+
+# Batching 103
+Tradeoffs, tradeoffs everywhere
+- Can increase processing time (need to wait for all)
+- Can amplify failures
 
 ---
 
@@ -214,8 +236,7 @@ Sometimes messages vanish into the void
 If it first you don't succeed...
 - Retries convert errors into latency
 - But not everything is retryable...
-- Consumes throughput
-- And can head-of-line block
+- Consumes throughput, increases load
 
 ---
 
@@ -228,26 +249,66 @@ Sometimes we need to cross several layers (e.g. caches, SSTables)
 
 ---
 
-# Layers
+# Mo layers
+
+<img src="/images/layers-latency-riddle.svg" />
+
+---
+
+# The curse of latency amplification
+<img src="/images/layers-latency-amplification.svg" />
+
+---
+
+# Backpressure
 
 <img src="/images/interaction-buffers-layers-dark.svg" />
 
+---
+layout: section
+---
+
+# Let's get practical
 
 ---
 
-# All together now!
+
+<img src="/images/simple-web-system.svg">
 
 ---
 
-# Takeaways
+<img src="/images/simple-web-system-1.svg">
 
+---
+
+<img src="/images/simple-web-system-2.svg">
+
+---
+
+<img src="/images/simple-web-system-3.svg">
+
+---
+
+# So what have we learned?
+Amplifications!
+- Latency (queueing, timeouts, retries, batching)
+- Throughput (fragmentation, retries)
+- Data (quantum sizes, layers)
+
+---
+
+# What to do?
 - Know your queues
+- Reduce your variance
+- Control timeouts, retries
 - Latency/Throughput tradeoffs
-- Align to quantum sizes
-- Batch
-- Mind the latency gaps
+- Beware of layers
+- Backpressure & load management
 
 ---
 layout: end
 ---
+
 # May the perf be with you
+
+---
