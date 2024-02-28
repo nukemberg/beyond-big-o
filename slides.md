@@ -113,6 +113,21 @@ We need a model which is
 
 ---
 
+# Computers be like
+
+<img src="/images/computer-parts.svg" />
+
+---
+
+# Numbers every developer should know
+
+<!-- <LatencyNumbers /> -->
+
+<QRCode value="https://colin-scott.github.io/personal_website/research/interactive_latency.html" height=100 width=100 />
+
+
+---
+
 # The interaction buffer
 <img src="/images/interaction-buffer-dark.svg">
 
