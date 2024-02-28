@@ -22,45 +22,6 @@ colorSchema: dark
 ## Avishai Ish-Shalom
 
 ---
-layout: two-cols-header
-image: ./public/images/Deming.jpg
-class: big-quote
-title: Why performance theory
----
-# Performance "theory"?
-## wat??
-::left::
-
-> Experience by itself teaches nothing...\
-> Without theory, experience has no meaning.\
-> Without theory, one has no questions to ask.\
-> Hence, without theory, there is no learning.
->  <footer><cite>W. Edwards Deming</cite></footer>
-
-::right::
-<img src="/images/Deming.jpg" />
----
-
-# Big O
-
-Algorithmic time/memory complexity
-
-<img src="/images/linear-o-dark.svg" />
-
----
-
-# But in reality...
-<img src="/images/actual-linear-dark.svg" />
-
----
-disabled: true
-title: List insert example
----
-
-# In reality....
-<img src="/images/list-insert-latency-dark.svg" />
-
----
 title: Same algorithm, different performance
 ---
 # Explain dis
@@ -90,10 +51,51 @@ for(int i = 0; i < n; ++i) {
 x5 faster!!!
 ---
 
+# Big O
+
+Algorithmic time/memory complexity
+
+<img src="/images/linear-o-dark.svg" />
+
+---
+
+# But in reality...
+<img src="/images/actual-linear-dark.svg" />
+
+---
+disabled: true
+title: List insert example
+---
+
+# In reality....
+<img src="/images/list-insert-latency-dark.svg" />
+---
+
 # Wat
 - Implementations matter
 - Hardware matters: chokepoints, saturation, characteristic sizes, etc
 - IRL everything has a distribution
+
+---
+layout: two-cols-header
+image: ./public/images/Deming.jpg
+class: big-quote
+title: Why performance theory
+---
+
+# Performance "theory"?
+## wat??
+
+::left::
+
+> Experience by itself teaches nothing...\
+> Without theory, experience has no meaning.\
+> Without theory, one has no questions to ask.\
+> Hence, without theory, there is no learning.
+>  <footer><cite>W. Edwards Deming</cite></footer>
+
+::right::
+<img src="/images/Deming.jpg" />
 
 ---
 layout: fact
@@ -122,6 +124,8 @@ We need a model which is
 # Numbers every developer should know
 
 <!-- <LatencyNumbers /> -->
+
+[Latency numbers](https://colin-scott.github.io/personal_website/research/interactive_latency.html)
 
 <QRCode value="https://colin-scott.github.io/personal_website/research/interactive_latency.html" height=100 width=100 />
 
@@ -157,6 +161,8 @@ backgroundSize: 100%
 <div class="queue-equation" style="margin-top: auto; float: left;">
 $$
 Latency \propto \frac{\rho}{1 - \rho}
+\\
+\rho = Utilization
 $$
 </div>
 
@@ -193,6 +199,8 @@ $$
 - Small messages either
    - Waste capacity
    - Amplify throughput 
+
+---
 
 # Fragmentation
 
@@ -319,6 +327,8 @@ Amplifications!
 - Latency/Throughput tradeoffs
 - Beware of layers
 - Backpressure & load management
+
+Every one of those is a topic in itself
 
 ---
 layout: end
