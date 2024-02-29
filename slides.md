@@ -123,11 +123,11 @@ We need a model which is
 
 # Numbers every developer should know
 
-<!-- <LatencyNumbers /> -->
+<LatencyNumbers />
 
-[Latency numbers](https://colin-scott.github.io/personal_website/research/interactive_latency.html)
-
+<div class="absolute bottom-0 right-0">
 <QRCode value="https://colin-scott.github.io/personal_website/research/interactive_latency.html" height=100 width=100 />
+</div>
 
 
 ---
