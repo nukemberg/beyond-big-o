@@ -312,6 +312,9 @@ layout: section
 
 ---
 
+<CacheDBSimulation />
+
+---
 # So what have we learned?
 Amplifications!
 - Latency (queueing, timeouts, retries, batching)
@@ -329,6 +332,15 @@ Amplifications!
 - Backpressure & load management
 
 Every one of those is a topic in itself
+
+---
+
+# Tools of the trade
+
+- pdq (multiple languages)
+- SimPy (python)
+- queueing-tool (python)
+- SimScript (javascript)
 
 ---
 layout: end
