@@ -1,6 +1,6 @@
 <template>
     <div :style="{'height': height + 'px', 'width': width + 'px'}">
-        <QRCodeVue3 :value="value" :height="height" :width="width" />
+        <QRCodeVue3 :value="value" :height=height :width=width />
     </div>
 </template>
 

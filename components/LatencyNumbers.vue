@@ -2,14 +2,17 @@
     <div class="container rows-2">
         <div id="slider mb-10">
             <span>Year: {{ year }}</span>
-            <input class="mx-4" type="range" name="year" id="slider-year" min="1986" max="2024" v-model="year">
+            <input class="mx-4" type="range" name="year" id="slider-year" min="1990" max="2024" v-model="year">
         </div>
         <div class="grid grid-cols-4">
             <template v-for="(obj, key) in data">
                 <div class="">
-                    <template v-for="item in obj">
+                    <template v-for="(item, itemName) in obj">
                         <div class="grid grid-cols-2 object my-2">
-                            <div class="" :ref="(el) => el.replaceChildren(svgBoxes(item.value, item.unit).node())"></div>
+                            <div>
+                                <svg :id="key + '-' + itemName">
+                                </svg>
+                            </div>
                             <div class="">{{ item.description }}
                                 <svg v-if="item.descriptionElementStyle" width="11" height="11" style="display: inline;">
                                     <rect height="10" width="10" x="0" y="0" :style="item.descriptionElementStyle"></rect>
@@ -31,7 +34,7 @@
 </style>
 
 <script setup>
-import {computed, defineModel} from "vue";
+import {computed, defineModel, onUpdated, onMounted} from "vue";
 import * as d3 from "d3";
 import * as math from "mathjs";
 
@@ -203,29 +206,32 @@ function colorForUnit(unit) {
     }
 }
 
-// Display functions:
-function svgBoxes(n, unit) {
+function diagram(el, n, unit) {
     let boxes = math.unit(n, "ns").divide(math.unit(unit));
-    let cw = 100;
-    let ch = Math.ceil(boxes / 10)*10;
-    let rects = d3.create("svg:svg").
-        attr("width", cw).
-        attr("height", ch);
-
-    let length = 10;
-    
     let color = colorForUnit(unit);
-    for (let idx = 0; idx < Math.ceil(boxes); idx+=1) {
-        let row = Math.floor(idx / 10);
-        let col = idx % 10;
-        let width = idx > Math.floor(boxes) ? length*(boxes - idx) : length;
-        rects.append("svg:rect").
-            attr("x", col*length).
-            attr("y", row*length).
-            attr("height", length).
-            attr("width", width).
-            attr("fill", color);
+    let length = 10;
+    let cw = 100;
+    let ch = Math.ceil(boxes / 10)*length;
+
+    let data = Array(Math.floor(boxes)).fill(1);
+    const remainder = boxes - Math.floor(boxes);
+    if (remainder > 0) {
+        data.push(remainder);
     }
+    
+
+    let rects = d3.select(el).
+        attr("width", cw).
+        attr("height", ch)
+        .selectAll("rect")
+        .data(data)
+        .join("rect")
+        .attr("x", (d, idx) => length*(idx%10))
+        .attr("y", (d, idx) => Math.floor(idx/10)*length)
+        .attr("height", length)
+        .attr("width", (d) => d*length)
+        .attr("fill", color);
+
     return rects;
 }
 
@@ -281,4 +287,15 @@ const data = computed(() => ({
         wan: {value: getWanRTT(), unit: "1ms", description: "Packet roundtrip CA to Netherlands"}
     }
 }));
+
+function d3Draw() {
+    Object.entries(data.value).forEach(([k, obj]) => {
+        Object.entries(obj).forEach(([subkey, item]) => {
+            diagram(`#${k}-${subkey}`, item.value, item.unit);
+        }) 
+    });
+}
+
+onMounted(d3Draw);
+onUpdated(d3Draw);
 </script>
