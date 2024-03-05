@@ -179,7 +179,7 @@ Latency \propto \sigma^2
 $$
 </div>
 
-<QueueModel model="kingman"></QueueModel>
+<QueueModel model="kingman" width=400></QueueModel>
 
 ---
 
@@ -188,7 +188,7 @@ $$
 - Stateful load balancing
 - Better batching
 
-<QueueModel model="mmc"></QueueModel>
+<QueueModel model="mmc" width=400></QueueModel>
 
 ---
 

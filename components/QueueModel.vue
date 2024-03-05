@@ -8,7 +8,9 @@ Chart.defaults.borderColor = '#AAAAAA';
 Chart.defaults.color = '#FFFFFF';
 
 const props = defineProps({
-    model: {type: String, default: 'mm1'}
+    model: {type: String, default: 'mm1'},
+    height: {type: Number, default: 250},
+    width: {type: Number, default: 250}
 });
 
 function mm1(rho) {
@@ -81,6 +83,7 @@ const data = computed(function() {
 const options = {
     title: 'Queue latency',
     responsive: false,
+    aspectRatio: 3,
     elements: {
         point: {pointStyle: false}
     },
@@ -113,22 +116,19 @@ const options = {
     width: fit-content;
     display: block;
 }
-input {
-    margin-left: 5px;
-}
 </style>
 
 <template>
     <div class="grid grid-rows-2 box chart-container">
         <div class="chart">
-            <Line ref="chart" height="250px" :data="data" :options="options"></Line>
+            <Line ref="chart" :height="`${height}px`" :width="`${props.width}px`" :data="data" :options="options"></Line>
         </div>
         <div class="box row-span-2 row-start-2">
             <template v-if="model == 'kingman'">
-                <label for="variance">Variance</label><input label="Variance" type="range" name="variance" id="" min="1" max="10" v-model="variance">
+                <label for="variance">Variance<input class="ml-4" label="Variance" type="range" name="variance" id="" min="1" max="10" v-model="variance"></label>
             </template>
             <template v-else-if="model == 'mmc'">
-                <label for="workers">Workers</label><input label="Workers" type="range" name="workers" id="" min="1" max="10" v-model="workers">        
+                <label for="workers">Workers<input class="ml-4" label="Workers" type="range" name="workers" id="" min="1" max="10" v-model="workers"></label>    
             </template>
         </div>
     </div>
